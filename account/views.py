@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
-
+from django.contrib import messages
 
 # Create your views here.
 
@@ -20,6 +20,7 @@ def signupfunc(request):
         except:
             user = User.objects.create_user(post_username, post_email, post_password)
             login(request, user)
+            messages.success(request, 'ユーザー登録に成功しました。')
             return render(request, 'home.html')
     return render(request, 'signup.html')
 
@@ -42,6 +43,5 @@ def logoutfunc(request):
 def userlistfunc(request):
     object_list = User.objects.all()
     return render(request, 'userlist.html', {'object_list':object_list})
-
 def homefunc(request):
     return render(request, 'home.html')
