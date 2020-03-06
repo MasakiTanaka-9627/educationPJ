@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock customcss %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <h2>投稿詳細</h2>
+            <div class="box3 mb-3">
+                <div class="user">ユーザー名：{{ object.authour }}</div>
+                <div class="title">タイトル：{{ object.title }}</div>
+                <div class="content">id：{{ object.id }}</div>
+                <span class="content">本文：{{ object.content}}</span>
+                <div>
+                    <a rel="nofollow" data-method="post" href="#">いいね！</a>
+                </div>
+                <div class="mx-5 my-3">
+                    <a class="btn btn-outline-primary btn-block my-1" href="#">編集</a>
+                    <a class="btn btn-outline-secondary btn-block my-3" data-confirm="削除しますか？" rel="nofollow"
+                        data-method="delete" href="#">削除</a>
+                </div>
+            </div>
+            <h2>コメント</h2>
+            <form class="new_comment" id="new_comment" action="/boards/1/comments" accept-charset="UTF-8" method="post">
+                <input name="utf8" type="hidden" value="&#x2713;">
+                <input type="hidden" name="authenticity_token">
+                <div class="mb-2">
+                    <textarea class="form-control" name="comment[content]" id="comment_content" cols="10" rows="5"></textarea>
+                </div>
+                <input type="submit" name="commit" value="送信" class="btn btn-primary btn-block" data-disable-with="送信">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

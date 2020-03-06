@@ -20,11 +20,11 @@
                 <form class="form-signin" method='POST' action=''>{% csrf_token %}
                     <div class="form-group">
                         <label for="user">ユーザー名</label>
-                        <input class="form-control" placeholder="Name" type="user" name="username" id="session_email" />
+                        <input class="form-control" placeholder="Name" type="user" value="root" name="username" id="session_email" />
                     </div>
                     <div class="form-group">
                         <label for="session_password">パスワード</label>
-                        <input class="form-control" placeholder="password" type="password" name="password"
+                        <input class="form-control" placeholder="password" value="root" type="password" name="password"
                             id="session_password" />
                     </div>
                     <div class="col-8 offset-2">

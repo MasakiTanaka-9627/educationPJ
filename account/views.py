@@ -16,7 +16,8 @@ def signupfunc(request):
         post_password = request.POST['password']
         try:
             User.objects.get(username=post_username)
-            return render(request, 'signup.html', {'error':'このユーザーは登録されています'})
+            messages.error(request, 'このユーザーは登録されています')
+            return render(request, 'signup.html')
         except:
             user = User.objects.create_user(post_username, post_email, post_password)
             login(request, user)
@@ -40,8 +41,9 @@ def logoutfunc(request):
     logout(request)
     return redirect('signup')
 
-def userlistfunc(request):
+def user_listfunc(request):
     object_list = User.objects.all()
-    return render(request, 'userlist.html', {'object_list':object_list})
+    return render(request, 'user_list.html', {'object_list':object_list})
+    
 def homefunc(request):
     return render(request, 'home.html')
