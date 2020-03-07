@@ -12,16 +12,16 @@
     <div class="row">
         <div class="col-lg-6 offset-lg-3">
             <h2>ユーザー一覧</h2>
-            {% for item in  object_list%}
+            {% for user in users %}
             <div class="box3 mb-3">
-                <div class="content">ユーザーID：{{ item.id }}</div>
-                <div class="user">ユーザー名：{{ item.username }}</div>
-                <div class="content mb-3">メール：{{ item.email }}</div>
+                <div class="content">ユーザーID：{{ user.id }}</div>
+                <div class="user">ユーザー名：{{ user.username }}</div>
+                <div class="content mb-3">メール：{{ user.email }}</div>
                 <div class="row col-8 offset-2">
                     <a class="btn btn-outline-primary btn-block" rel="nofollow" data-method="post" href="#">フォローする</a>
                 </div>
                 <div class="row col-8 offset-2">
-                    <a class="btn btn-outline-primary btn-block my-2" href="#">詳細</a>
+                    <a class="btn btn-outline-primary btn-block my-2" href="{% url 'user_detail' user.pk %}">詳細</a>
                 </div>
             </div>
             {% endfor %}

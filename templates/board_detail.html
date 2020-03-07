@@ -14,10 +14,10 @@
 
             <h2>投稿詳細</h2>
             <div class="box3 mb-3">
-                <div class="user">ユーザー名：{{ object.authour }}</div>
-                <div class="title">タイトル：{{ object.title }}</div>
-                <div class="content">id：{{ object.id }}</div>
-                <span class="content">本文：{{ object.content}}</span>
+                <div class="user">ユーザー名：{{ board.authour }}</div>
+                <div class="title">タイトル：{{ board.title }}</div>
+                <div class="content">id：{{ board.pk }}</div>
+                <span class="content">本文：{{ board.content}}</span>
                 <div>
                     <a rel="nofollow" data-method="post" href="#">いいね！</a>
                 </div>
@@ -25,7 +25,7 @@
 
                     <a class="btn btn-outline-primary btn-block my-1" href="#">編集</a>
 
-                    <form method="post" action="{% url 'board_delete' object.pk %}"> {% csrf_token %}
+                    <form method="post" action="{% url 'board_delete' board.pk %}"> {% csrf_token %}
                         <button class="btn btn-outline-secondary btn-block my-3" type="submit">削除</button>
                     </form>
                 </div>

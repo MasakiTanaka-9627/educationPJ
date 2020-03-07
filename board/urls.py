@@ -4,9 +4,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from board import views
 
-
-
-
 urlpatterns = [
     path('create/', BoardCreate.as_view(), name='board_create'),
     path('list/', views.board_listfunc, name='board_list'),

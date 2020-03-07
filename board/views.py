@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 
-# Create your views here.
+# Board
 
 class BoardCreate(CreateView):
     template_name = 'board_create.html'
@@ -20,12 +20,12 @@ class BoardCreate(CreateView):
         return redirect(self.get_success_url())
 
 def board_listfunc(request):
-    object_list = BoardModel.objects.all()
-    return render(request, 'board_list.html', {'object_list':object_list})
+    boards = BoardModel.objects.all()
+    return render(request, 'board_list.html', {'boards':boards})
 
 def board_detailfunc(request, pk):
-    object = BoardModel.objects.get(pk=pk)
-    return render(request, 'board_detail.html', {'object':object})
+    board = BoardModel.objects.get(pk=pk)
+    return render(request, 'board_detail.html', {'board':board})
 
 @require_POST
 def board_deletefunc(request, pk):

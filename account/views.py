@@ -7,8 +7,7 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib import messages
 
-
-# Create your views here.
+# Account
 
 def signupfunc(request):
     if request.method == 'POST':
@@ -43,8 +42,12 @@ def logoutfunc(request):
     return redirect('signup')
 
 def user_listfunc(request):
-    object_list = User.objects.all()
-    return render(request, 'user_list.html', {'object_list':object_list})
+    users = User.objects.all()
+    return render(request, 'user_list.html', {'users':users})
+
+def user_detailfunc(request, pk):
+    user = User.objects.get(pk=pk)
+    return render(request, 'user_detail.html', {'user':user})
 
 def homefunc(request):
     return render(request, 'home.html')
