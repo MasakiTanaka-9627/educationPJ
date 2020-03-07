@@ -15,12 +15,9 @@
             <div class="box_profile">
                 <div class="row">
                     <div class="col-lg-3 mb-3">
-                        <a class="btn btn-outline-secondary btn-block mx-3 mt-4" data-method="get"
-                            href="#">いいね一覧</a>
-                        <a class="btn btn-outline-secondary btn-block mx-3 mt-4" data-method="get"
-                            href="#">フォロー一覧</a>
-                        <a class="btn btn-outline-secondary btn-block mx-3 mt-4" data-method="get"
-                            href="#">フォロワー一覧</a>
+                        <a class="btn btn-outline-secondary btn-block mx-3 mt-4" data-method="get" href="#">いいね一覧</a>
+                        <a class="btn btn-outline-secondary btn-block mx-3 mt-4" data-method="get" href="#">フォロー一覧</a>
+                        <a class="btn btn-outline-secondary btn-block mx-3 mt-4" data-method="get" href="#">フォロワー一覧</a>
                     </div>
                     <div class="col-lg-9">
                         <div class="row">
@@ -47,7 +44,10 @@
                             <h2 class="mx-2 mt-2">自己紹介文</h2>
                             <p class="mx-2">#####</p>
                             <div class="row col-10 offset-1">
-                                <a class="btn btn-outline-secondary btn-block my-2" href="#">プロフィール設定</a>
+                                <form method="get" action="{% url 'user_edit' user.pk %}"> {% csrf_token %}
+                                    <button class="btn btn-outline-secondary btn-block my-2"
+                                        type="submit">プロフィール設定</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -55,5 +55,5 @@
             </div>
         </div>
     </div>
-
+</div>
     {% endblock content %}

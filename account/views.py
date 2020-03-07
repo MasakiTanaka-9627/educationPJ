@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import User
+from .models import User, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -9,27 +9,31 @@ from django.contrib import messages
 
 # Account
 
+
 def signupfunc(request):
     if request.method == 'POST':
         post_username = request.POST['username']
-        post_email = request.POST['email']        
+        post_email = request.POST['email']
         post_password = request.POST['password']
         try:
             User.objects.get(username=post_username)
             messages.error(request, 'このユーザーは登録されています')
             return render(request, 'signup.html')
         except:
-            user = User.objects.create_user(post_username, post_email, post_password)
+            user = User.objects.create_user(
+                post_username, post_email, post_password)
             login(request, user)
             messages.success(request, 'ユーザー登録に成功しました')
             return render(request, 'home.html')
     return render(request, 'signup.html')
 
+
 def loginfunc(request):
     if request.method == 'POST':
         post_username = request.POST['username']
         post_password = request.POST['password']
-        user = authenticate(request, username=post_username, password=post_password)
+        user = authenticate(request, username=post_username,
+                            password=post_password)
         if user is not None:
             login(request, user)
             return redirect('home')
@@ -37,17 +41,34 @@ def loginfunc(request):
             return redirect('login')
     return render(request, 'login.html')
 
+
 def logoutfunc(request):
     logout(request)
     return redirect('signup')
 
+
 def user_listfunc(request):
     users = User.objects.all()
-    return render(request, 'user_list.html', {'users':users})
+    return render(request, 'user_list.html', {'users': users})
+
 
 def user_detailfunc(request, pk):
     user = User.objects.get(pk=pk)
-    return render(request, 'user_detail.html', {'user':user})
+    return render(request, 'user_detail.html', {'user': user})
+
+
+def user_editfunc(request, pk):
+    user = User.objects.get(pk=pk)
+    profile = Profile.objects.get(user_id=pk)
+    if request.method  == "POST":
+        user.username = request.POST.get('username')
+        user.email = request.POST.get('email')
+        profile.birth_date = request.POST.get("birth_date")
+        profile.save()
+        user.save()
+        return redirect('user_detail', pk)
+
+    return render(request, 'user_edit.html', {'user': user})
 
 def homefunc(request):
     return render(request, 'home.html')

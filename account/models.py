@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.base_user import BaseUserManager
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -103,3 +105,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    birth_date = models.DateField(null=True, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    introduction = models.CharField(max_length=300, blank=True)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
