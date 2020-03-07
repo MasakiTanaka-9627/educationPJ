@@ -8,19 +8,26 @@ from django.views.decorators.http import require_POST
 
 # Board
 
-class BoardCreate(CreateView):
-    template_name = 'board_create.html'
-    model = BoardModel
-    fields = ('title', 'content', 'author')    
-    success_url = reverse_lazy('board_list')
-    
-    def form_valid(self, form):
-        self.object = post = form.save()
-        messages.success(self.request, f'記事を作成しました。 タイトル:{post.title} pk:{post.pk}')
-        return redirect(self.get_success_url())
+def board_createfunc(request):
+    if request.method == 'GET':
+        return render(request, 'board_create.html')
+            
+    if request.method == 'POST' & (not request.POST.get('author')):
+        post_content = request.POST['content']
+        print(post_content)
+        return render(request, 'board_create.html', {'content':post_content})
+        
+    if request.method == 'POST':
+        post_title = request.POST['title']
+        post_content = request.POST['content']
+        post_author = request.POST['author']
+        board = BoardModel(title=post_title, content=post_content, author=post_author)
+        board.save()
+        messages.success(request, '記事を作成しました。タイトル:{post.title}')
+        return redirect('board_list')
 
 def board_listfunc(request):
-    boards = BoardModel.objects.all()
+    boards = BoardModel.objects.all().order_by('-created_at')
     return render(request, 'board_list.html', {'boards':boards})
 
 def board_detailfunc(request, pk):

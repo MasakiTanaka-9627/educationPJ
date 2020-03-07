@@ -20,21 +20,20 @@
             <form class="form-signin" method='POST' action=''>{% csrf_token %}
                 <div class="form-group">
                     <label for="user_name">ユーザー名</label>
-                    <input class="form-control" type="text" value="test" name="username" id="user_name">
+                    <input class="form-control" type="text" name="username" id="user_name">
                 </div>
                 <div class="form-group">
                     <label for="user_email">メールアドレス</label>
-                    <input class="form-control" type="text" value="test@text.com" name="email" id="user_email">
+                    <input class="form-control" type="text" value="{{ email }}" name="email" id="user_email">
                 </div>
-
                 <div class="form-group">
                     <label for="user_password">パスワード</label>
-                    <input class="form-control" type="password" value="1111" name="password" id="user_password">
+                    <input class="form-control" type="password" name="password" id="user_password">
                 </div>
 
                 <div class="form-group">
                     <label for="user_password_confirmation">パスワード（もう１度ご入力ください）</label>
-                    <input class="form-control" type="password" value="1111" name="password_confirmation"
+                    <input class="form-control" type="password" name="password_confirmation"
                         id="user_password_confirmation">
                 </div>
 

@@ -12,9 +12,9 @@
 {% for board in  boards%}
 <div class="box3 mb-3">
     <div class="user">ユーザー名：{{ board.author }}</div>
+    <div class="content">作成日時：{{ board.created_at|date:"Y-m-j H:i:s" }}</div>
     <div class="title">タイトル：{{ board.title }}</div>
     <div class="content">内容：{{ board.content }}</div>
-    <div class="content">作成日時：{{ board.created_at|date:"Y-m-j H:i:s" }}</div>
     <div class="my-3">
         <div class="content">PV数：#</div>
         <div class="content">回答数：#</div>

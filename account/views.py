@@ -6,11 +6,16 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from board.models import BoardModel
+from datetime import datetime, timedelta, date
+from django.utils import timezone
 
 # Account
 
-
 def signupfunc(request):
+    if not request.POST['username']:
+        post_email = request.POST['email']
+        return render(request, 'signup.html', {'email':post_email})
     if request.method == 'POST':
         post_username = request.POST['username']
         post_email = request.POST['email']
@@ -18,7 +23,7 @@ def signupfunc(request):
         try:
             User.objects.get(username=post_username)
             messages.error(request, 'このユーザーは登録されています')
-            return render(request, 'signup.html')
+            return render(request, 'signup.html', {'email':post_email})
         except:
             user = User.objects.create_user(
                 post_username, post_email, post_password)
@@ -73,4 +78,5 @@ def user_editfunc(request, pk):
     return render(request, 'user_edit.html', {'user': user})
 
 def homefunc(request):
-    return render(request, 'home.html')
+    boards = BoardModel.objects.filter(created_at__date=date.today()).order_by('-created_at')
+    return render(request, 'home.html', {'boards': boards} )
