@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock customcss %}
 
-{% block content %}
+{% block main %}
 <h2>投稿一覧</h2>
 {% for board in  boards%}
 <div class="box3 mb-3">
@@ -16,12 +16,12 @@
     <div class="content">内容：{{ board.content }}</div>
     <div class="content">作成日時：{{ board.created_at|date:"Y-m-j H:i:s" }}</div>
     <div class="my-3">
-        <div class="content">いいね数：#</div>
-        <div class="content">コメント数：#</div>
+        <div class="content">PV数：#</div>
+        <div class="content">回答数：#</div>
     </div>
     <div class="mx-5 my-3">
         <a class="btn btn-outline-primary btn-block my-2" href="{% url 'board_detail' board.pk %}">詳細</a>
     </div>
 </div>
 {% endfor %}
-{% endblock content %}
+{% endblock main %}

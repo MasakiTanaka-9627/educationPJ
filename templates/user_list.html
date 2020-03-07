@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_list.html' %}
 {% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
@@ -7,24 +7,16 @@
 <link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock customcss %}
 
-{% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-            <h2>ユーザー一覧</h2>
-            {% for user in users %}
-            <div class="box3 mb-3">
-                <div class="content">ユーザーID：{{ user.id }}</div>
-                <div class="user">ユーザー名：{{ user.username }}</div>
-                <div class="content mb-3">メール：{{ user.email }}</div>
-                <div class="row col-8 offset-2">
-                    <a class="btn btn-outline-primary btn-block" rel="nofollow" data-method="post" href="#">フォローする</a>
-                </div>
-                <div class="row col-8 offset-2">
-                    <a class="btn btn-outline-primary btn-block my-2" href="{% url 'user_detail' user.pk %}">詳細</a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+{% block main %}
+<h2>ユーザー一覧</h2>
+{% for user in users %}
+<div class="box3 mb-3">
+    <div class="content">ユーザーID：{{ user.id }}</div>
+    <div class="user">ユーザー名：{{ user.username }}</div>
+    <div class="content mb-3">メールアドレス：{{ user.email }}</div>
+    <div class="row col-8 offset-2">
+        <a class="btn btn-outline-primary btn-block my-2" href="{% url 'user_detail' user.pk %}">詳細</a>
     </div>
-    {% endblock content %}
+</div>
+{% endfor %}
+{% endblock main %}
