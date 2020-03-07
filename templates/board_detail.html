@@ -10,28 +10,23 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-6 offset-lg-3">
+        <div class="col-lg-8 offset-lg-2">
 
-            <h2>投稿詳細</h2>
+            <h2>質問詳細</h2>
             <div class="box3 mb-3">
                 <div class="user">ユーザー名：{{ board.authour }}</div>
                 <div class="title">タイトル：{{ board.title }}</div>
                 <div class="content">id：{{ board.pk }}</div>
                 <span class="content">本文：{{ board.content}}</span>
-                <div>
-                    <a rel="nofollow" data-method="post" href="#">いいね！</a>
-                </div>
                 <div class="mx-5 my-3">
-
                     <a class="btn btn-outline-primary btn-block my-1" href="#">編集</a>
-
                     <form method="post" action="{% url 'board_delete' board.pk %}"> {% csrf_token %}
                         <button class="btn btn-outline-secondary btn-block my-3" type="submit">削除</button>
                     </form>
                 </div>
             </div>
 
-            <h2>コメント</h2>
+            <h2>回答</h2>
             <form class="new_comment" id="new_comment" action="#" accept-charset="UTF-8" method="post">
                 <div class="mb-2">
                     <textarea class="form-control" name="content" id="comment_content" cols="10" rows="5"></textarea>
@@ -42,3 +37,4 @@
     </div>
 </div>
 {% endblock content %}
+

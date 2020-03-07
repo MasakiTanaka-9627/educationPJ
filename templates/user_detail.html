@@ -32,23 +32,22 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h2 class="mx-2">フォロー数</h2>
-                                <p class="mx-2">##</p>
+                                <h2 class="mx-2">生年月日</h2>
+                                <p class="mx-2">{{ user.profile.birth_day|date:"Y-m-j" }}</p>
                             </div>
                             <div class="col-lg-6">
-                                <h2 class="mx-2">フォロワー数</h2>
-                                <p class="mx-2">#</p>
+                                <h2 class="mx-2">住居地</h2>
+                                <p class="mx-2">{{ user.profile.location }}</p>
                             </div>
                         </div>
                         <div>
                             <h2 class="mx-2 mt-2">自己紹介文</h2>
-                            <p class="mx-2">#####</p>
-                            <div class="row col-10 offset-1">
-                                <form method="get" action="{% url 'user_edit' user.pk %}"> {% csrf_token %}
-                                    <button class="btn btn-outline-secondary btn-block my-2"
-                                        type="submit">プロフィール設定</button>
-                                </form>
-                            </div>
+                            <p class="mx-2">{{ user.profile.introduction }}</p>
+                            <form method="GET" action="{% url 'user_edit' user.pk %}"> {% csrf_token %}
+                                <div class="mx-2 mt-2">
+                                    <button class="btn btn-outline-secondary btn-block" type="submit">プロフィール設定</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -56,4 +55,4 @@
         </div>
     </div>
 </div>
-    {% endblock content %}
+{% endblock content %}

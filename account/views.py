@@ -63,7 +63,9 @@ def user_editfunc(request, pk):
     if request.method  == "POST":
         user.username = request.POST.get('username')
         user.email = request.POST.get('email')
-        profile.birth_date = request.POST.get("birth_date")
+        profile.location = request.POST.get("location")        
+        profile.birth_day = request.POST.get("birth_day")        
+        profile.introduction = request.POST.get("introduction")
         profile.save()
         user.save()
         return redirect('user_detail', pk)

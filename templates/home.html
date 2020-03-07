@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_list.html' %}
 {% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
@@ -8,11 +8,21 @@
 {% endblock customcss %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-            <h2>Home</h2>
+<div>
+    <h1>数学をはじめよう！</h1>
+    <p style="color: #7f7f7f;">Free Educationは数学に特化した質問掲示板サイトです。</p>
+
+    <form class="form-signin" method='POST' action=''> {% csrf_token %}
+        <div class="form-group">
+            <label for="user_email">メールアドレス</label>
+            <input class="form-control" type="text" value="test@text.com" name="email" id="user_email">
         </div>
-    </div>
+
+        <a href="{% url 'signup' %}" class="btn btn-primary btn-block mb-4" role="button" aria-pressed="true">無料会員登録</a>
+    </form>
+</div>
+
+<div>
+    <h2>今日の質問</h2>
 </div>
 {% endblock content %}
