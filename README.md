@@ -16,7 +16,7 @@
 │   ├── 
 │   └── 
 ├── educationPJ …… projectの設定をおこなう
-├── mysql …… データベース
+├── mysql …… データベース(gitでは管理しない)
 ├── static …… cssファイルを格納するディレクトリ
 └── templates …… htmlファイルを格納するディレクトリ
 
