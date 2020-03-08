@@ -5,6 +5,17 @@
 
 {% block customcss %}
 <link rel="stylesheet" href="{% static 'style.css' %}">
+
+<script type="text/javascript">
+    function myfunc() {
+        if (window.confirm('本当にいいんですね？')) {
+        }
+        else {
+            window.alert('キャンセルされました');
+        }
+    }
+</script>
+
 {% endblock customcss %}
 
 {% block content %}
@@ -20,7 +31,7 @@
                 <div class="mx-5 my-3">
                     <a class="btn btn-outline-primary btn-block my-1" href="{% url 'board_edit' board.pk %}">編集</a>
                     <form method="post" action="{% url 'board_delete' board.pk %}"> {% csrf_token %}
-                        <button class="btn btn-outline-secondary btn-block my-3" type="submit">削除</button>
+                        <button class="btn btn-outline-secondary btn-block my-3" type="submit" Onclick="myfunc()">削除</button>
                     </form>
                 </div>
             </div>
@@ -36,4 +47,3 @@
     </div>
 </div>
 {% endblock content %}
-
