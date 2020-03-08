@@ -5,6 +5,22 @@
 
 {% block customcss %}
 <link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+$( function() {
+    let dateFormat = 'yy-mm-dd';  
+  $( "#user_birth_day" ).datepicker({
+    dateFormat: dateFormat,
+    changeMonth: true,//月の選択ボックス
+    changeYear: true//年の選択ボックス
+  });
+} );
+</script>
+
 {% endblock customcss %}
 
 {% block content %}
@@ -25,15 +41,15 @@
                     </div>
                     <div class="form-group">
                         <label for="user_content">生年月日</label>
-                        <input class="form-control" name="birth_day" id="user_birth_day">
+                        <input class="form-control" name="birth_day" value='{{ user.profile.birth_day|date:"Y-m-j" }}' id="user_birth_day">
                     </div>
                     <div class="form-group">
                         <label for="user_content">居住地</label>
-                        <input class="form-control" name="location" id="user_birth_day">
+                        <input class="form-control" name="location" value="{{ user.profile.location }}" id="user_birth_day">
                     </div>                    
                     <div class="form-group">
                         <label for="board_content">自己紹介</label>
-                        <textarea class="form-control" name='introduction' id="board_content"></textarea>
+                        <textarea class="form-control" name='introduction' id="board_content">{{ user.profile.introduction　}}</textarea>
                     </div>
     
                     <div class="col-lg-8 offset-lg-2">
@@ -50,5 +66,4 @@
         </div>
     </div>
 </div>
-
 {% endblock content %}

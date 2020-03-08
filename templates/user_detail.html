@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_list.html' %}
 {% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
@@ -7,52 +7,31 @@
 <link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock customcss %}
 
-{% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <h2>プロフィール</h2>
-            <div class="box_profile">
-                <div class="row">
-                    <div class="col-lg-3 mb-3">
-                        <a class="btn btn-outline-secondary btn-block mx-3 mt-4" data-method="get" href="#">いいね一覧</a>
-                        <a class="btn btn-outline-secondary btn-block mx-3 mt-4" data-method="get" href="#">フォロー一覧</a>
-                        <a class="btn btn-outline-secondary btn-block mx-3 mt-4" data-method="get" href="#">フォロワー一覧</a>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h2 class="mx-2">名前</h2>
-                                <p class="mx-2">{{ user.username }}</p>
-                            </div>
-                            <div class="col-lg-6">
-                                <h2 class="mx-2">email</h2>
-                                <p class="mx-2">{{ user.email }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h2 class="mx-2">生年月日</h2>
-                                <p class="mx-2">{{ user.profile.birth_day|date:"Y-m-j" }}</p>
-                            </div>
-                            <div class="col-lg-6">
-                                <h2 class="mx-2">住居地</h2>
-                                <p class="mx-2">{{ user.profile.location }}</p>
-                            </div>
-                        </div>
-                        <div>
-                            <h2 class="mx-2 mt-2">自己紹介文</h2>
-                            <p class="mx-2">{{ user.profile.introduction }}</p>
-                            <form method="GET" action="{% url 'user_edit' user.pk %}"> {% csrf_token %}
-                                <div class="mx-2 mt-2">
-                                    <button class="btn btn-outline-secondary btn-block" type="submit">プロフィール設定</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+{% block main %}
+<h2>プロフィール</h2>
+    <div class="box_profile">
+        <div class="row">
+        <div class="col-lg-6 mb-3">
+            <form method="GET" action="{% url 'user_edit' user.pk %}"> {% csrf_token %}
+                <div class="mt-2">
+                    <button class="btn btn-outline-secondary btn-block" type="submit">プロフィール設定</button>
                 </div>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <h2 class="mx-2">名前</h2>
+            <p class="mx-2">{{ user.username }}</p>
+            <h2 class="mx-2">email</h2>
+            <p class="mx-2">{{ user.email }}</p>
+            <h2 class="mx-2">生年月日</h2>
+            <p class="mx-2">{{ user.profile.birth_day|date:"Y-m-j" }}</p>
+            <h2 class="mx-2">住居地</h2>
+            <p class="mx-2">{{ user.profile.location }}</p>
+            <div>
+                <h2 class="mx-2 mt-2">自己紹介文</h2>
+                <p class="mx-2">{{ user.profile.introduction }}</p>
             </div>
         </div>
     </div>
 </div>
-{% endblock content %}
+{% endblock main %}

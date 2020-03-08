@@ -10,23 +10,9 @@
 {% block main %}
 <div>
     <h1>数学をはじめよう！</h1>
-    <p style="color: #7f7f7f;">Free Educationは数学に特化した質問掲示板サイトです。</p>
+    <p style="color: #7f7f7f;">Free Educationは、数学・算数に関する質問ができるサイトです。メールアドレス1つで、簡単に会員登録できます。</p>
 
     {% if user.is_authenticated %}
-    {% else %}
-    <form class="form-signin" method='POST' action="{% url 'signup' %}"> {% csrf_token %}
-        <div class="form-group">
-            <label for="user_email">メールアドレス</label>
-            <input class="form-control" type="text" name="email" id="user_email">
-        </div>
-        <input type='hidden' name='username' value=''>
-        <div class="col-lg-8 offset-lg-2">
-            <input type="submit" name="commit" class="btn btn-primary btn-block mb-4" value="無料会員登録">
-        </div>
-    </form>
-    {% endif %}
-</div>
-<div>
     <h2>質問フォーム</h2>
     <p style="color: #7f7f7f;">数学・算数でわからないことは質問してみよう！！</p>
     <form class="new_board" id="new_board" method='POST' action="{% url 'board_create' %}"> {% csrf_token %}
@@ -39,11 +25,32 @@
             <input type="submit" name="commit" value="質問フォームへ" class="btn btn-primary btn-block">
         </div>
     </form>
-
 </div>
+    {% else %}
+    <form class="form-signin" method='POST' action="{% url 'signup' %}"> {% csrf_token %}
+        <div class="form-group">
+            <label for="user_email">メールアドレス</label>
+            <input class="form-control" type="text" name="email" id="user_email">
+        </div>
+        <input type='hidden' name='username' value=''>
+        <div class="col-lg-8 offset-lg-2">
+            <input type="submit" name="commit" class="btn btn-primary btn-block mb-4" value="無料会員登録">
+        </div>
+    </form>
+</div>
+    {% endif %}
 
 <div>
     <h2>今日のコラム</h2>
+    <div class="box2 my-3">
+        <h3 class="mt-2">Pythonでできること</h3>
+        <p>Pythonは、データ解析や数値計算が特になプログラミング言語です。現在は、多くの研究機関や企業で使用されています。本日は、Pythonでできることをわかりやすく解説します！</p>
+        <div class="col-lg-10 offset-lg-1">
+            <div class="mx-5 my-3">
+                <a class="btn btn-info btn-block" href="#">コラム記事へ</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div>
@@ -63,7 +70,5 @@
         </div>
     </div>
     {% endfor %}
-
 </div>
-
 {% endblock main %}

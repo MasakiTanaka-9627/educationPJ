@@ -13,8 +13,8 @@ from django.utils import timezone
 # Account
 
 def signupfunc(request):
-    if not request.POST['username']:
-        post_email = request.POST['email']
+    if not request.POST.get('username'):
+        post_email = request.POST.get('email')
         return render(request, 'signup.html', {'email':post_email})
     if request.method == 'POST':
         post_username = request.POST['username']

@@ -12,7 +12,7 @@ def board_createfunc(request):
     if request.method == 'GET':
         return render(request, 'board_create.html')
             
-    if request.method == 'POST' & (not request.POST.get('author')):
+    if request.method == 'POST' and (not request.POST.get('author')):
         post_content = request.POST['content']
         print(post_content)
         return render(request, 'board_create.html', {'content':post_content})
