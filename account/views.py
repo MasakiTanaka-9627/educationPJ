@@ -65,6 +65,8 @@ def user_detailfunc(request, pk):
 def user_editfunc(request, pk):
     user = User.objects.get(pk=pk)
     profile = Profile.objects.get(user_id=pk)
+    if user.pk != request.user.pk:
+        return redirect('home')
     if request.method  == "POST":
         user.username = request.POST.get('username')
         user.email = request.POST.get('email')
@@ -74,7 +76,6 @@ def user_editfunc(request, pk):
         profile.save()
         user.save()
         return redirect('user_detail', pk)
-
     return render(request, 'user_edit.html', {'user': user})
 
 def homefunc(request):
