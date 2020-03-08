@@ -8,7 +8,6 @@ from django.views.decorators.http import require_POST
 
 # Board
 
-
 def board_createfunc(request):
     if request.method == 'GET':
         return render(request, 'board_create.html')
