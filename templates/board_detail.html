@@ -18,7 +18,7 @@
                 <div class="content">id：{{ board.pk }}</div>
                 <span class="content">本文：{{ board.content}}</span>
                 <div class="mx-5 my-3">
-                    <a class="btn btn-outline-primary btn-block my-1" href="#">編集</a>
+                    <a class="btn btn-outline-primary btn-block my-1" href="{% url 'board_edit' board.pk %}">編集</a>
                     <form method="post" action="{% url 'board_delete' board.pk %}"> {% csrf_token %}
                         <button class="btn btn-outline-secondary btn-block my-3" type="submit">削除</button>
                     </form>
