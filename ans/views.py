@@ -16,11 +16,11 @@ def ans_createfunc(request):
     if request.method == 'POST':
         post_content = request.POST.get('content')
         post_title = request.POST.get('title')
-        post_author = request.POST.get('author')
+        post_author = request.POST.get('user')
         board_id = request.POST.get('board')
-        ans_board = BoardModel.objects.get(pk=board_id)
+        ans_board = BoardModel.objects.get(id=board_id)
         ans = AnsModel(
-            content=post_content, author=post_author, board=ans_board
+            content=post_content, author=post_author, board_id=ans_board
             )
         ans.save()
         messages.success(request, '回答を投稿しました。')

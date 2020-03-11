@@ -5,7 +5,7 @@ from .models import AnsModel
 
 class AnsModelAdmin(admin.ModelAdmin):
     # 一覧表示画面のフィールド
-    list_display = ('board_id_id', 'author', 'created_at')
+    list_display = ('board_id', 'author', 'created_at')
     # 一覧表示画面のソート
     ordering = ('created_at',)  # '-created_at' とすると降順になります。
     # 編集画面のフィールド
