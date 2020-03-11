@@ -1,12 +1,11 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from board import views
+from ans import views
 
 urlpatterns = [
-    path('create/', views.board_createfunc, name='board_create'),
-    path('list/', views.board_listfunc, name='board_list'),
-    path('detail/<int:pk>', views.board_detailfunc, name='board_detail'),
-    path('edit/<int:pk>', views.board_editfunc, name='board_edit'),    
-    path('delete/<int:pk>', views.board_deletefunc, name='board_delete'),
+    path('create/<int:pk>', views.ans_createfunc, name='ans_create'),
+    # path('detail/<int:pk>', views.ans_detailfunc, name='ans_detail'),
+    # path('edit/<int:pk>', views.ans_editfunc, name='ans_edit'),    
+    # path('delete/<int:pk>', views.ans_deletefunc, name='ans_delete'),
 ]

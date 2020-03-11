@@ -19,7 +19,7 @@
             <label for="board_content">質問内容</label>
             <textarea class="form-control" name='content' rows="5" cols="60" id="board_content"></textarea>
         </div>
-        <input type='hidden' name='author' value=''>
+        <input type='hidden' name='user' value='{{ user.id }}'>
         <div class="col-lg-8 offset-lg-2">
             <input type="submit" name="commit" value="質問フォームへ" class="btn btn-primary btn-block">
         </div>
