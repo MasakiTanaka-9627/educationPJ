@@ -5,6 +5,18 @@
 
 {% block customcss %}
 <link rel="stylesheet" href="{% static 'style.css' %}">
+
+<script type="text/javascript">
+    function myfunc() {
+        if (window.confirm('送信してよろしいですか？')) {
+            return true;
+        } else {
+            window.alert('キャンセルされました');
+            return false;
+        }
+    }
+</script>
+
 {% endblock customcss %}
 
 {% block content %}
@@ -18,22 +30,25 @@
                 <div class="content">id：{{ board.pk }}</div>
                 <span class="content">本文：{{ board.content}}</span>
                 <div class="mx-5 my-3">
-                    <a class="btn btn-outline-primary btn-block my-1" href="#">編集</a>
-                    <form method="post" action="{% url 'board_delete' board.pk %}"> {% csrf_token %}
+                    <a class="btn btn-outline-primary btn-block my-1" href="{% url 'board_edit' board.pk %}">編集</a>
+                    <form method="post" action="{% url 'board_delete' board.pk %}" onSubmit="return myfunc();">
+                        {% csrf_token %}
                         <button class="btn btn-outline-secondary btn-block my-3" type="submit">削除</button>
                     </form>
                 </div>
             </div>
 
             <h2>回答</h2>
-            <form class="new_comment" id="new_comment" action="#" accept-charset="UTF-8" method="post">
+            <form method="POST" id="new_comment" action="{% url 'ans_create'%}">
+                {% csrf_token %}
                 <div class="mb-2">
                     <textarea class="form-control" name="content" id="comment_content" cols="10" rows="5"></textarea>
                 </div>
+                <input type='hidden' name='user' value='{{ user.username }}'>
+                <input type='hidden' name='board' value='{{ board.id }}'>                
                 <input type="submit" name="commit" value="送信" class="btn btn-primary btn-block" data-disable-with="送信">
             </form>
         </div>
     </div>
 </div>
 {% endblock content %}
-

@@ -18,8 +18,8 @@ class UserManager(BaseUserManager):
         """
         if not username:
             raise ValueError('The given username must be set')
+        username = self.model.normalize_username(username)        
         email = self.normalize_email(email)
-        username = self.model.normalize_username(username)
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -86,7 +86,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
-        #abstract = True # ここを削除しないといけないことを忘れない！！！！！！！！！！
 
     def clean(self):
         super().clean()

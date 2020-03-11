@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'account', 
-    'board'
+    'board',
+    'ans',
 ]
 
 MIDDLEWARE = [
@@ -89,7 +90,10 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',
-        },        
+        },
+        'TEST': {
+            'NAME': 'test_database',
+        },                
     }
 }
 

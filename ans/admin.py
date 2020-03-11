@@ -1,14 +1,14 @@
 from django.contrib import admin
-from .models import BoardModel
+from .models import AnsModel
 
 # Register your models here.
 
-class BoardModelAdmin(admin.ModelAdmin):
+class AnsModelAdmin(admin.ModelAdmin):
     # 一覧表示画面のフィールド
-    list_display = ('pk', 'title', 'author', 'created_at', 'updated_at')
+    list_display = ('board_id', 'author', 'created_at')
     # 一覧表示画面のソート
     ordering = ('created_at',)  # '-created_at' とすると降順になります。
     # 編集画面のフィールド
-    fields = ('title', 'author', 'content')
+    fields = ('author', 'content', 'board_id')
 
-admin.site.register(BoardModel, BoardModelAdmin)
+admin.site.register(AnsModel, AnsModelAdmin)
