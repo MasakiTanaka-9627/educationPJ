@@ -9,6 +9,14 @@ from django.contrib import messages
 from board.models import BoardModel
 from datetime import datetime, timedelta, date
 from django.utils import timezone
+from django.http import HttpResponse
+from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
+from django.shortcuts import render
+import io
+import matplotlib.pyplot as plt
 
 # Account
 
@@ -82,3 +90,29 @@ def user_editfunc(request, pk):
 def homefunc(request):
     boards = BoardModel.objects.filter(created_at__date=date.today()).order_by('-created_at')
     return render(request, 'home.html', {'boards': boards} )
+
+#png画像形式に変換数関数
+def plt2png():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', dpi=200)
+    s = buf.getvalue()
+    buf.close()
+    return s
+
+
+# html表示view
+def analysis_screen(request):
+    return render(request, 'analysis.html')
+
+#画像埋め込み用view
+def img_plot(request):
+    # matplotを使って作図する
+    (ex)
+    x = [1, 5, 9]
+    y = [4, 6, 8]
+    ax = plt.subplot()
+    ax.scatter(x, y)
+    png = plt2png()
+    plt.cla()
+    response = HttpResponse(png, content_type='image/png')
+    return response
