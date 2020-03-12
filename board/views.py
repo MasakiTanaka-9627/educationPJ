@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import BoardModel
+from .models import BoardModel, BoardImage
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.views.decorators.http import require_POST
 from account.models import User
 from ans.models import AnsModel
+from .forms import BoardImageForm
 
 # Board
 
@@ -58,3 +59,20 @@ def board_editfunc(request, pk):
         return redirect('board_detail', pk)
 
     return render(request, 'board_create.html', {'board': board})
+
+def showall(request):
+    images = BoardImage.objects.all()
+    context = {'images':images}
+    return render(request, 'showall.html', context)
+
+def upload(request):
+    if request.method == "POST":
+        form = BoardImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('showall')
+    else:
+        form = BoardImageForm()
+
+    context = {'form':form}
+    return render(request, 'upload.html', context)

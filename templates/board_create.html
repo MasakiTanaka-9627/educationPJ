@@ -14,18 +14,34 @@
             <h2>質問フォーム</h2>
             <form class="new_board" id="new_board" action="" method='POST'> {% csrf_token %}
                 <div class="form-group">
-                                        <label for="board_title">タイトル</label>
+                    <label for="board_title">タイトル</label>
                     <input class="form-control" type="text" value="{{ board.title }}" name='title' id="board_title">
                 </div>
                 <div class="form-group">
                     <label for="board_content">質問内容</label>
-                    <textarea class="form-control" name='content' rows="10" cols="60" id="board_content">{{ content }}{{ board.content }}</textarea>
+                    <textarea class="form-control" name='content' rows="10" cols="60"
+                        id="board_content">{{ content }}{{ board.content }}</textarea>
                 </div>
                 <input type='hidden' name='user' value='{{ user.id }}'>
                 <div class="col-lg-8 offset-lg-2">
                     <input type="submit" name="commit" value="投稿する" class="btn btn-primary btn-block">
                 </div>
             </form>
+            <h2>Please Upload</h2>
+
+            <form enctype="multipart/form-data" action="{% url 'upload' %}" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Upload">
+            </form>
+
+            <h2>Your board</h2>
+
+            {% for image in images %}
+            <img src='{{ MEDIA_URL }}{{image.picture}}' width=200>
+            <h3>{{ image.title }}</h3>
+            {% endfor %}
+
         </div>
     </div>
 </div>

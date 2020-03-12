@@ -13,5 +13,4 @@ class BoardModelAdmin(admin.ModelAdmin):
 
 admin.site.register(BoardImage)
 
-
 admin.site.register(BoardModel, BoardModelAdmin)
