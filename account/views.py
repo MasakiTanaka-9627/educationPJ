@@ -12,11 +12,6 @@ from django.utils import timezone
 from django.http import HttpResponse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
-from django.shortcuts import render
-import io
-import matplotlib.pyplot as plt
 
 # Account
 
@@ -91,62 +86,3 @@ def homefunc(request):
     boards = BoardModel.objects.filter(created_at__date=date.today()).order_by('-created_at')
     return render(request, 'home.html', {'boards': boards} )
 
-#png画像形式に変換数関数
-def plt2png():
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=200)
-    s = buf.getvalue()
-    buf.close()
-    return s
-
-
-# html表示view
-def analysis_screen(request):
-    return render(request, 'analysis.html')
-
-#画像埋め込み用view
-def img_plot(request):
-    # matplotを使って作図する
-    x = [1, 5, 9]
-    y = [4, 6, 8]
-    ax = plt.subplot()
-    ax.scatter(x, y)
-    png = plt2png()
-    plt.cla()
-    response = HttpResponse(png, content_type='image/png')
-    return response
-
-def graph2():
-    import matplotlib.pyplot
-    from matplotlib.backends.backend_agg import FigureCanvasAgg
-    import random
-    import string
-    import os
-
-    class TempImage(object):
-
-        def __init__(self, file_name):
-            self.file_name = file_name
-
-        def create_png(self):
-            fig, ax = matplotlib.pyplot.subplots()
-            ax.set_title(u'IMINASHI GRAPH 2')
-            x_ax = range(1, 284)
-            y_ax = [x * random.randint(436, 875) for x in x_ax]
-            ax.plot(x_ax, y_ax)
-
-            canvas = FigureCanvasAgg(fig)
-            canvas.print_figure(self.file_name)
-
-        def __enter__(self):
-            return self
-
-        def __exit__(self, exc_type, exc_value, traceback):
-            os.remove(self.file_name)
-
-    chars = string.digits + string.letters
-    img_name = ''.join(random.choice(chars) for i in xrange(64)) + '.png'
-
-    with TempImage(img_name) as img:
-        img.create_png()
-        return send_file(img_name, mimetype='image/png')

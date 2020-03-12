@@ -37,7 +37,6 @@
                     </form>
                 </div>
             </div>
-
             <h2>回答</h2>
             <form method="POST" id="new_comment" action="{% url 'ans_create'%}">
                 {% csrf_token %}
@@ -48,6 +47,17 @@
                 <input type='hidden' name='board' value='{{ board.id }}'>                
                 <input type="submit" name="commit" value="送信" class="btn btn-primary btn-block" data-disable-with="送信">
             </form>
+            <h2>回答一覧</h2>
+            {% for ans in  ans_all%}
+            <div class="box3 mb-3">
+                <div class="user">ユーザー名：{{ ans.author }}</div>
+                <div class="content">id：{{ ans.pk }}</div>
+                <span class="content">本文：{{ ans.content}}</span>
+                <div class="mx-5 my-3">
+                    <a class="btn btn-outline-primary btn-block my-1" href="#">詳細</a>
+                </div>
+            </div>
+            {% endfor %}            
         </div>
     </div>
 </div>

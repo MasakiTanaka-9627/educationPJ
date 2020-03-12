@@ -25,3 +25,7 @@ def ans_createfunc(request):
         ans.save()
         messages.success(request, '回答を投稿しました。')
         return redirect('board_list')
+
+def ans_detailfunc(request, pk):
+    ans = AnsModel.objects.get(pk=pk)
+    return render(request, 'ans_detail.html', {'ans': ans})
