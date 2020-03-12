@@ -16,7 +16,7 @@
     <div class="title">タイトル：{{ board.title }}</div>
     <div class="content">内容：{{ board.content }}</div>
     <div class="my-3">
-        <div class="content">PV数：#</div>
+        <div class="content">PV数：{{ Ans.objects.fileter(pk=board.id).count() }}</div>
         <div class="content">回答数：#</div>
     </div>
     <div class="mx-5 my-3">

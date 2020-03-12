@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<script type="text/javascript">
+    function myfunc() {
+        if (window.confirm('送信してよろしいですか？')) {
+            return true;
+        } else {
+            window.alert('キャンセルされました');
+            return false;
+        }
+    }
+</script>
+
+{% endblock customcss %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <h2>回答詳細</h2>
+            <div class="box3 mb-3">
+                <div class="user">ユーザー名：{{ ans.author }}</div>
+                <div class="content">id：{{ ans.pk }}</div>
+                <span class="content">本文：{{ ans.content}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

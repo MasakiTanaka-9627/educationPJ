@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from account.models import User
+from ans.models import AnsModel
 
 # Board
 
@@ -29,12 +30,15 @@ def board_createfunc(request):
 
 def board_listfunc(request):
     boards = BoardModel.objects.all().order_by('-created_at')
+    for board in boards:
+        board.ans_count = AnsModel.objects.filter(board_id_id=board.id)
     return render(request, 'board_list.html', {'boards': boards})
 
 
 def board_detailfunc(request, pk):
     board = BoardModel.objects.get(pk=pk)
-    return render(request, 'board_detail.html', {'board': board})
+    ans_all = AnsModel.objects.filter(board_id_id=pk)
+    return render(request, 'board_detail.html', {'board': board, 'ans_all': ans_all})
 
 
 @require_POST

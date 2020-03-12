@@ -10,5 +10,5 @@ urlpatterns = [
     path('login/', loginfunc, name='login'),
     path('userlist/', user_listfunc, name='user_list'),
     path('detail/<int:pk>', user_detailfunc, name='user_detail'),
-    path('edit/<int:pk>', user_editfunc, name='user_edit'),    
+    path('edit/<int:pk>', user_editfunc, name='user_edit'),
 ]
