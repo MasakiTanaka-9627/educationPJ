@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BoardModel
+from .models import BoardModel, BoardImage
 
 # Register your models here.
 
@@ -10,5 +10,8 @@ class BoardModelAdmin(admin.ModelAdmin):
     ordering = ('created_at',)  # '-created_at' とすると降順になります。
     # 編集画面のフィールド
     fields = ('title', 'author', 'content')
+
+admin.site.register(BoardImage)
+
 
 admin.site.register(BoardModel, BoardModelAdmin)
