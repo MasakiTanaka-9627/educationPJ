@@ -31,7 +31,7 @@ def board_createfunc(request):
 def board_listfunc(request):
     boards = BoardModel.objects.all().order_by('-created_at')
     for board in boards:
-        board.ans_count = AnsModel.objects.filter(board_id_id=board.id)
+        board.ans_count = AnsModel.objects.filter(board_id_id=board.id).count()
     return render(request, 'board_list.html', {'boards': boards})
 
 
