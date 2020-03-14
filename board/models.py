@@ -5,7 +5,7 @@ from account.models import User
 # Create your models here.
 
 class BoardModel(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=25)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     count_ans = models.IntegerField(null=True)
@@ -16,8 +16,8 @@ class BoardModel(models.Model):
         return self.title
 
 class BoardImage(models.Model):
-    picture = models.ImageField(upload_to='images/')
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=20)
+    picture = models.ImageField(upload_to='images')
     board = models.ForeignKey(BoardModel, on_delete=models.CASCADE, null=True)
 
     def __str__(self):

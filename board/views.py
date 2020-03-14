@@ -17,6 +17,9 @@ def board_createfunc(request):
         return render(request, 'board_create.html')
 
     if request.method == 'POST':
+        
+        print(request)
+
         post_content = request.POST.get('content')
         post_title = request.POST.get('title')
         user_id = request.POST.get('user')
@@ -27,9 +30,13 @@ def board_createfunc(request):
             title=post_title, content=post_content, author=user
         )
         board.save()
-        form.image = request.FILES.get('image')
-        form = BoardImageForm(request.POST, request.FILES)
-        form.save()
+        
+        board_image = BoardImage()
+        image_title = request.POST['title']
+        # board_image = request.FILES['images']
+        board_id = board.title
+        board_image.save('', image_title)
+
         messages.success(request, '記事を作成しました。')
         return redirect('board_list')
 
