@@ -11,6 +11,7 @@ from .forms import BoardImageForm
 
 # Board
 
+
 def board_createfunc(request):
     if request.method == 'GET':
         return render(request, 'board_create.html')
@@ -24,10 +25,14 @@ def board_createfunc(request):
             return render(request, 'board_create.html', {'content': post_content})
         board = BoardModel(
             title=post_title, content=post_content, author=user
-            )
+        )
         board.save()
+        form.image = request.FILES.get('image')
+        form = BoardImageForm(request.POST, request.FILES)
+        form.save()
         messages.success(request, '記事を作成しました。')
         return redirect('board_list')
+
 
 def board_listfunc(request):
     boards = BoardModel.objects.all().order_by('-created_at')
@@ -60,10 +65,12 @@ def board_editfunc(request, pk):
 
     return render(request, 'board_create.html', {'board': board})
 
+
 def showall(request):
     images = BoardImage.objects.all()
-    context = {'images':images}
+    context = {'images': images}
     return render(request, 'showall.html', context)
+
 
 def upload(request):
     if request.method == "POST":
@@ -74,5 +81,5 @@ def upload(request):
     else:
         form = BoardImageForm()
 
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'upload.html', context)

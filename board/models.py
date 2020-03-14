@@ -8,7 +8,7 @@ class BoardModel(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    count_ans = models.IntegerField()
+    count_ans = models.IntegerField(null=True)
     created_at = models.DateTimeField(verbose_name='登録日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
 
@@ -18,6 +18,7 @@ class BoardModel(models.Model):
 class BoardImage(models.Model):
     picture = models.ImageField(upload_to='images/')
     title = models.CharField(max_length=200)
+    board = models.ForeignKey(BoardModel, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title
