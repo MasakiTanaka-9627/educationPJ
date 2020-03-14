@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.views.decorators.http import require_POST
 from account.models import User
 from ans.models import AnsModel
-from .forms import BoardImageForm
+from django.views.generic import CreateView
 
 # Board
 
@@ -17,7 +17,7 @@ def board_createfunc(request):
         return render(request, 'board_create.html')
 
     if request.method == 'POST':
-        
+
         print(request)
 
         post_content = request.POST.get('content')
@@ -30,13 +30,6 @@ def board_createfunc(request):
             title=post_title, content=post_content, author=user
         )
         board.save()
-        
-        board_image = BoardImage()
-        image_title = request.POST['title']
-        # board_image = request.FILES['images']
-        board_id = board.title
-        board_image.save('', image_title)
-
         messages.success(request, '記事を作成しました。')
         return redirect('board_list')
 
@@ -70,23 +63,4 @@ def board_editfunc(request, pk):
         board.save()
         return redirect('board_detail', pk)
 
-    return render(request, 'board_create.html', {'board': board})
-
-
-def showall(request):
-    images = BoardImage.objects.all()
-    context = {'images': images}
-    return render(request, 'showall.html', context)
-
-
-def upload(request):
-    if request.method == "POST":
-        form = BoardImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('showall')
-    else:
-        form = BoardImageForm()
-
-    context = {'form': form}
-    return render(request, 'upload.html', context)
+ 
