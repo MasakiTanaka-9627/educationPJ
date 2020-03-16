@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from .models import BoardModel, BoardImage
+from account.models import User
+from ans.models import AnsModel
 from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views.decorators.http import require_POST
-from account.models import User
-from ans.models import AnsModel
 from django.views.generic import CreateView
 
 # Board
@@ -17,9 +16,6 @@ def board_createfunc(request):
         return render(request, 'board_create.html')
 
     if request.method == 'POST':
-
-        print(request)
-
         post_content = request.POST.get('content')
         post_title = request.POST.get('title')
         user_id = request.POST.get('user')
@@ -30,6 +26,19 @@ def board_createfunc(request):
             title=post_title, content=post_content, author=user
         )
         board.save()
+
+        
+        post_title = request.POST.get('title')
+        image = request.FILES.get('user')
+        user = User.objects.get(pk=user_id)
+        if post_title is None:
+            return render(request, 'board_create.html', {'content': post_content})
+        board = BoardModel(
+            title=post_title, content=post_content, author=user
+        )
+        board.save()
+
+
         messages.success(request, '記事を作成しました。')
         return redirect('board_list')
 
