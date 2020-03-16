@@ -12,7 +12,8 @@
     <div class="row">
         <div class="col-lg-6 offset-lg-3">
             <h2>質問フォーム</h2>
-            <form class="new_board" id="new_board" action="" method='POST'　enctype="multipart/form-data"> {% csrf_token %}
+            <form class="new_board" id="new_board" action="" method='POST' enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="board_title">タイトル</label>
                     <input class="form-control" type="text" value="{{ board.title }}" name='title' id="board_title">
@@ -22,10 +23,12 @@
                     <textarea class="form-control" name='content' rows="10" cols="60"
                         id="board_content">{{ content }}{{ board.content }}</textarea>
                 </div>
+
                 <div class="form-group">
-                    <label for="board_content">画像</label>
-                    <input type='file' name='images'>
+                    <label for="board_content" enctype="multipart/form-data">画像</label>
+                    <input type= 'file' name='image' enctype="multipart/form-data">
                 </div>
+                
                 <input type='hidden' name='user' value='{{ user.id }}'>
                 <div class="col-lg-8 offset-lg-2">
                     <input type="submit" name="commit" value="投稿する" class="btn btn-primary btn-block">

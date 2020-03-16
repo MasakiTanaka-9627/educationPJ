@@ -17,7 +17,7 @@ class BoardModel(models.Model):
 
 class BoardImage(models.Model):
     title = models.CharField(max_length=20)
-    picture = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='images')
     board = models.ForeignKey(BoardModel, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
