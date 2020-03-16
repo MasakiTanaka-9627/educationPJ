@@ -13,3 +13,11 @@ class AnsModel(models.Model):
 
     def __str__(self):
         return self.author
+
+class AnsImage(models.Model):
+    title = models.CharField(max_length=20)
+    image = models.ImageField(upload_to='images')
+    ans = models.ForeignKey(AnsModel, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.title

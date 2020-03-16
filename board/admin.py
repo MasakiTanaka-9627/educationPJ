@@ -11,10 +11,12 @@ class BoardModelAdmin(admin.ModelAdmin):
     # 編集画面のフィールド
     fields = ('title', 'author', 'content')
 
+admin.site.register(BoardModel, BoardModelAdmin)    
+
 class BoardImageAdmin(admin.ModelAdmin):
     # 一覧表示画面のフィールド
     list_display = ('pk', 'board')
 
 admin.site.register(BoardImage, BoardImageAdmin)
 
-admin.site.register(BoardModel, BoardModelAdmin)
+

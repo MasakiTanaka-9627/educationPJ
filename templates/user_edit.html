@@ -30,11 +30,18 @@ $( function() {
         <div class="col-lg-6 offset-lg-3">
             <h2>編集フォーム</h2>
             <div class="box">
-                <form class="form-signin" method='POST' action="{% url 'user_edit' user.pk %}"> {% csrf_token %}
+                <form class="form-signin" action="{% url 'user_edit' user.pk %}" method='POST' enctype="multipart/form-data"> {% csrf_token %}
                     <div class="form-group">
                         <label for="user_name">ユーザー名</label>
                         <input class="form-control" type="text" value="{{ user.username }}" name="username" id="user_name">
                     </div>
+
+                    <div class="form-group">
+                        <label for="board_content">画像</label>
+                        <input type= 'file' name='image'>
+                    </div>
+    
+
                     <div class="form-group">
                         <label for="user_email">メールアドレス</label>
                         <input class="form-control" type="email" value="{{ user.email }}" name="email" id="user_email">

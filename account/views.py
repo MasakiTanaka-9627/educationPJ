@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import User, Profile
+from .models import User, Profile, UserImage
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -15,10 +15,11 @@ from django.contrib.auth.decorators import login_required
 
 # Account
 
+
 def signupfunc(request):
     if not request.POST.get('username'):
         post_email = request.POST.get('email')
-        return render(request, 'signup.html', {'email':post_email})
+        return render(request, 'signup.html', {'email': post_email})
     if request.method == 'POST':
         post_username = request.POST['username']
         post_email = request.POST['email']
@@ -26,7 +27,7 @@ def signupfunc(request):
         try:
             User.objects.get(username=post_username)
             messages.error(request, 'このユーザーは登録されています')
-            return render(request, 'signup.html', {'email':post_email})
+            return render(request, 'signup.html', {'email': post_email})
         except:
             user = User.objects.create_user(
                 post_username, post_email, post_password)
@@ -68,21 +69,30 @@ def user_detailfunc(request, pk):
 def user_editfunc(request, pk):
     user = User.objects.get(pk=pk)
     profile = Profile.objects.get(user_id=pk)
+    image = UserImage.objects.get(user_id=pk)    
     if user.pk != request.user.pk:
         return redirect('home')
-    if request.method  == "POST":
-        user.username = request.POST.get('username')
-        user.email = request.POST.get('email')
-        
-        profile.location = request.POST.get("location")        
-        profile.birth_day = request.POST.get("birth_day")        
-        profile.introduction = request.POST.get("introduction")
+
+    if request.method == "POST":
+        user.username = request.POST['username']
+        user.email = request.POST['email']
+        profile.location = request.POST["location"]
+        profile.birth_day = request.POST["birth_day"]
+        profile.introduction = request.POST["introduction"]
+
+
+        image.image = request.FILES['image']
+
+
         profile.save()
         user.save()
+        image.save()
+
         return redirect('user_detail', pk)
+
     return render(request, 'user_edit.html', {'user': user})
 
 def homefunc(request):
-    boards = BoardModel.objects.filter(created_at__date=date.today()).order_by('-created_at')
-    return render(request, 'home.html', {'boards': boards} )
-
+    boards = BoardModel.objects.filter(
+        created_at__date=date.today()).order_by('-created_at')
+    return render(request, 'home.html', {'boards': boards})

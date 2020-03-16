@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import AnsModel
+from .models import AnsModel, AnsImage
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
@@ -8,6 +8,7 @@ from django.views.decorators.http import require_POST
 from board.models import BoardModel
 
 # Ans
+
 
 def ans_createfunc(request):
     # if request.method == 'GET':
@@ -21,10 +22,18 @@ def ans_createfunc(request):
         ans_board = BoardModel.objects.get(id=board_id)
         ans = AnsModel(
             content=post_content, author=post_author, board_id=ans_board
-            )
+        )
         ans.save()
+
+        post_image = request.FILES['image']
+        board_image = AnsImage.objects.create(
+            image=post_image, ans_id=ans.id
+        )
+        board_image.save()
+
         messages.success(request, '回答を投稿しました。')
         return redirect('board_list')
+
 
 def ans_detailfunc(request, pk):
     ans = AnsModel.objects.get(pk=pk)

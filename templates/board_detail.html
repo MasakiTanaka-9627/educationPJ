@@ -38,11 +38,17 @@
                 </div>
             </div>
             <h2>回答</h2>
-            <form method="POST" id="new_comment" action="{% url 'ans_create'%}">
+            <form method="POST" id="new_comment" action="{% url 'ans_create'%}"  enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-2">
                     <textarea class="form-control" name="content" id="comment_content" cols="10" rows="5"></textarea>
                 </div>
+
+                <div class="form-group">
+                    <label for="board_content" enctype="multipart/form-data">画像</label>
+                    <input type= 'file' name='image' enctype="multipart/form-data">
+                </div>
+
                 <input type='hidden' name='user' value='{{ user.username }}'>
                 <input type='hidden' name='board' value='{{ board.id }}'>                
                 <input type="submit" name="commit" value="送信" class="btn btn-primary btn-block" data-disable-with="送信">

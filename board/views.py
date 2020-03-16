@@ -25,13 +25,13 @@ def board_createfunc(request):
             title = post_title, content = post_content, author = user
         )
         board.save()
-        print(board.pk)
+
         post_image = request.FILES['image']
         board_image = BoardImage.objects.create(
             image = post_image, board_id = board.id
         )
-        print(post_image)
         board_image.save()
+
         messages.success(request, '記事を作成しました。')
         return redirect('board_list')
 

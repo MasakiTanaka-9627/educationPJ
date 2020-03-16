@@ -1,98 +1,140 @@
 header {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 body {
-    padding-bottom: 60px;
+  padding-bottom: 60px;
 }
 
 h2 {
-    padding: 12px;
-    background: #444;
-    font-size: 16px;
-    color: #fff;
-    font-weight: 700;
+  padding: 12px;
+  background: #444;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
 }
 
 h3 {
-    position: relative;
-    padding: 0.25em 1em;
-    font-size: 25px;
-    border-top: solid 2px black;
-    border-bottom: solid 2px black;
-    display: inline-block;
-  }
-  h3:before, h3:after {
-    display: inline-block;
-    content: '';
-    position: absolute;
-    top: -7px;
-    width: 2px;
-    height: -webkit-calc(100% + 14px);
-    height: calc(100% + 14px);
-    background-color: black;
-  }
-  h3:before {
-    display: inline-block;
-    left: 7px;
-  }
-  h3:after {
-    display: inline-block;
-    right: 7px;
-  }
+  position: relative;
+  padding: 0.25em 1em;
+  font-size: 25px;
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
+  display: inline-block;
+}
+
+h3:before,
+h3:after {
+  display: inline-block;
+  content: '';
+  position: absolute;
+  top: -7px;
+  width: 2px;
+  height: -webkit-calc(100% + 14px);
+  height: calc(100% + 14px);
+  background-color: black;
+}
+
+h3:before {
+  display: inline-block;
+  left: 7px;
+}
+
+h3:after {
+  display: inline-block;
+  right: 7px;
+}
 
 .box2 {
-    padding: 5px;
-    margin-bottom: 16px;
-    font-weight: bold;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    background-color: #ffffff;
+  padding: 5px;
+  margin-bottom: 16px;
+  font-weight: bold;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: #ffffff;
 }
 
 .box3 {
-    padding: 0;
-    margin-top: 10px;
-    padding: 5px;
-    font-weight: bold;
-    border: solid 3px #000000;
-    background-color: #ffffff;
+  padding: 0;
+  margin-top: 10px;
+  padding: 5px;
+  font-weight: bold;
+  border: solid 3px #000000;
+  background-color: #ffffff;
 }
 
 .box_profile {
-    padding: 5px;
-    margin-bottom: 16px;
-    font-weight: bold;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    background-color: #ffffff;
+  padding: 5px;
+  margin-bottom: 16px;
+  font-weight: bold;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: #ffffff;
 }
 
 .box_profile p {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .Rankstyle-svg {
-    counter-reset:ctr-ranking;           /* カウンターをリセット */
-    text-align:left;                     /* 左寄せ */
-    font-size: 18px;                     /* フォントサイズ */
-    margin-left:20px;                    /* 左の余白高さ */
-  }
-  .Rankstyle-svg li {
-    position   : relative;               /* 指定した分だけ相対的に移動 */
-    line-height: 2;                      /* 行の高さ */
-  }
-  .Rankstyle-svg li:nth-child(-n+3) {
-    list-style-type : none ;             /* リストマーク消す */
-  }
-  .Rankstyle-svg li:nth-child(-n+3):before {
-    position: absolute;                  /* 親要素を基準 */
-    top: 0;                              /* 上限より表示 */
-    left: -35px;                         /* 箇条書きリストの左側に表示 */
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20height%3D%2730%27%20width%3D%2730%27%20viewBox%3D%270%200%2030%2030%27%20style%3D%27fill%3A%23999999%3Bstroke%3Anone%27%20%3E%3Cpath%20d%3D%27M1%202%20L8%2012%20L15%202%20L22%2012%20L29%202%20L26%2029%20L3%2029%20Z%27%20%2F%3E%3C%2Fsvg%3E"); /* svgで王冠を描く */
-    background-repeat: no-repeat;        /* 背景を１回のみ表示 */
-    content: counter(ctr-ranking, decimal); /* カウンタ追加 */
-    counter-increment: ctr-ranking;      /* カウンタの増分指定 */
-    color: #000;                         /* 文字の色の指定 */
-    font-size: 10px;                     /* 文字サイズの指定 */
-    padding: 10px 12px;                  /* 余白の指定 */
-  }
+  counter-reset: ctr-ranking;
+  /* カウンターをリセット */
+  text-align: left;
+  /* 左寄せ */
+  font-size: 18px;
+  /* フォントサイズ */
+  margin-left: 20px;
+  /* 左の余白高さ */
+}
+
+.Rankstyle-svg li {
+  position: relative;
+  /* 指定した分だけ相対的に移動 */
+  line-height: 2;
+  /* 行の高さ */
+}
+
+.Rankstyle-svg li:nth-child(-n+3) {
+  list-style-type: none;
+  /* リストマーク消す */
+}
+
+.Rankstyle-svg li:nth-child(-n+3):before {
+  position: absolute;
+  /* 親要素を基準 */
+  top: 0;
+  /* 上限より表示 */
+  left: -35px;
+  /* 箇条書きリストの左側に表示 */
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20height%3D%2730%27%20width%3D%2730%27%20viewBox%3D%270%200%2030%2030%27%20style%3D%27fill%3A%23999999%3Bstroke%3Anone%27%20%3E%3Cpath%20d%3D%27M1%202%20L8%2012%20L15%202%20L22%2012%20L29%202%20L26%2029%20L3%2029%20Z%27%20%2F%3E%3C%2Fsvg%3E");
+  /* svgで王冠を描く */
+  background-repeat: no-repeat;
+  /* 背景を１回のみ表示 */
+  content: counter(ctr-ranking, decimal);
+  /* カウンタ追加 */
+  counter-increment: ctr-ranking;
+  /* カウンタの増分指定 */
+  color: #000;
+  /* 文字の色の指定 */
+  font-size: 10px;
+  /* 文字サイズの指定 */
+  padding: 10px 12px;
+  /* 余白の指定 */
+}
+
+.R {
+  counter-reset: ctr-ranking 3;
+  /* カウンターをリセット */
+  text-align: left;
+  /* 左寄せ */
+  font-size: 18px;
+  /* フォントサイズ */
+  margin-left: 20px;
+  /* 左の余白高さ */
+}
+
+.R li {
+  position: relative;
+  /* 指定した分だけ相対的に移動 */
+  line-height: 2;
+  /* 行の高さ */
+}
