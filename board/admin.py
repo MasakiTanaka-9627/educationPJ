@@ -13,7 +13,7 @@ class BoardModelAdmin(admin.ModelAdmin):
 
 class BoardImageAdmin(admin.ModelAdmin):
     # 一覧表示画面のフィールド
-    list_display = ('pk', 'title', 'board')
+    list_display = ('pk', 'board')
 
 admin.site.register(BoardImage, BoardImageAdmin)
 

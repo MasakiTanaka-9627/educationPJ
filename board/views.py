@@ -26,10 +26,9 @@ def board_createfunc(request):
         )
         board.save()
         print(board.pk)
-        image_title = request.POST.get('title')
         post_image = request.FILES['image']
         board_image = BoardImage.objects.create(
-            title = image_title, image = post_image
+            image = post_image, board_id = board.id
         )
         print(post_image)
         board_image.save()
