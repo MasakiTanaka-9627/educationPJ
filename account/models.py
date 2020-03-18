@@ -111,13 +111,10 @@ class Profile(models.Model):
     birth_day = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=30, blank=True)
     introduction = models.CharField(max_length=300, blank=True)
+    image = models.ImageField(upload_to='images', null=True, blank=True)
 
     def __str__(self):
         return self.user.username
-
-class UserImage(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images', null=True, blank=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -127,8 +124,3 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
-@receiver(post_save, sender=User)
-def create_user_image(sender, instance, created, **kwargs):
-    if created:
-        UserImage.objects.create(user=instance)

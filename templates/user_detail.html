@@ -12,9 +12,6 @@
     <div class="box_profile">
         <div class="row">
         <div class="col-lg-6 mb-2">
-            <div class="mt-2 mx-4">
-            <img src='{{ MEDIA_URL }}{{ user.userimage.image }}' width=200>
-            </div>
             {% if user.pk == request.user.pk %}
             <form method="GET" action="{% url 'user_edit' user.pk %}"> {% csrf_token %}
                 <div class="mt-5 m">

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import BoardModel, BoardImage
+from .models import Board
 
 # Register your models here.
 
-class BoardModelAdmin(admin.ModelAdmin):
+class BoardAdmin(admin.ModelAdmin):
     # 一覧表示画面のフィールド
     list_display = ('pk', 'title', 'author', 'created_at', 'updated_at')
     # 一覧表示画面のソート
@@ -11,12 +11,4 @@ class BoardModelAdmin(admin.ModelAdmin):
     # 編集画面のフィールド
     fields = ('title', 'author', 'content', 'image')
 
-admin.site.register(BoardModel, BoardModelAdmin)    
-
-class BoardImageAdmin(admin.ModelAdmin):
-    # 一覧表示画面のフィールド
-    list_display = ('pk', 'board')
-
-admin.site.register(BoardImage, BoardImageAdmin)
-
-
+admin.site.register(Board, BoardAdmin)

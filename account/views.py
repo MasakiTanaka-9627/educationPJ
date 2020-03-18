@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from .models import User, Profile, UserImage
+from .models import User, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib import messages
-from board.models import BoardModel
+from board.models import Board
 from datetime import datetime, timedelta, date
 from django.utils import timezone
 from django.http import HttpResponse
@@ -14,7 +14,6 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 
 # Account
-
 
 def signupfunc(request):
     if not request.POST.get('username'):
@@ -36,7 +35,6 @@ def signupfunc(request):
             return render(request, 'home.html')
     return render(request, 'signup.html')
 
-
 def loginfunc(request):
     if request.method == 'POST':
         post_username = request.POST['username']
@@ -50,49 +48,35 @@ def loginfunc(request):
             return redirect('login')
     return render(request, 'login.html')
 
-
 def logoutfunc(request):
     logout(request)
     return redirect('signup')
-
 
 def user_listfunc(request):
     users = User.objects.all()
     return render(request, 'user_list.html', {'users': users})
 
-
 def user_detailfunc(request, pk):
     user = User.objects.get(pk=pk)
     return render(request, 'user_detail.html', {'user': user})
 
-
 def user_editfunc(request, pk):
     user = User.objects.get(pk=pk)
     profile = Profile.objects.get(user_id=pk)
-    image = UserImage.objects.get(user_id=pk)    
     if user.pk != request.user.pk:
         return redirect('home')
-
     if request.method == "POST":
         user.username = request.POST['username']
         user.email = request.POST['email']
         profile.location = request.POST["location"]
         profile.birth_day = request.POST["birth_day"]
         profile.introduction = request.POST["introduction"]
-
-
-        image.image = request.FILES['image']
-
-
         profile.save()
         user.save()
-        image.save()
-
         return redirect('user_detail', pk)
-
     return render(request, 'user_edit.html', {'user': user})
 
 def homefunc(request):
-    boards = BoardModel.objects.filter(
+    boards = Board.objects.filter(
         created_at__date=date.today()).order_by('-created_at')
     return render(request, 'home.html', {'boards': boards})
