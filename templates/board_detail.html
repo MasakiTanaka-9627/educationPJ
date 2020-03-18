@@ -27,13 +27,9 @@
             <div class="box3 mb-3">
                 <div class="user">ユーザー名：{{ board.author }}</div>
                 <div class="title">タイトル：{{ board.title }}</div>
-                <div class="content">id：{{ board.pk }}</div>
+                <div class="content">投稿日時：{{ board.created_at|date:"Y年n月j日 H:i:s" }}</div>
                 <div class="content">本文：{{ board.content}}</div>
-                {% if board_images is not None %}
-                {% for board_image in  board_images %}
-                <div class="content">画像：</div><img src='{{ MEDIA_URL }}{{ board_image.image }}' width=200>
-                {% endfor %}
-                {% endif %}
+                <div class="content">画像：</div><img src='{{ MEDIA_URL }}{{ board.image }}' width=200>
                 <div class="mx-5 my-3">
                     <a class="btn btn-outline-primary btn-block my-1" href="{% url 'board_edit' board.pk %}">編集</a>
                     <form method="post" action="{% url 'board_delete' board.pk %}" onSubmit="return myfunc();">
@@ -62,9 +58,10 @@
             {% for ans in ans_all %}
             <div class="box3 mb-3">
                 <div class="user">ユーザー名：{{ ans.author }}</div>
-                <div class="content">id：{{ ans.pk }}</div>
+                <div class="content">投稿日時：{{ ans.created_at|date:"Y年n月j日 H:i:s" }}</div>
+                <div class="content">更新日時：{{ ans.updated_at|date:"Y年n月j日 H:i:s" }}</div>
                 <span class="content">本文：{{ ans.content}}</span>
-                {% if ans.image　is not None %}
+                {% if ans.image != "" %}
                 <div class="content">画像：</div><img src='{{ MEDIA_URL }}{{ ans.image }}' width=200>
                 {% endif %}
                 <div class="mx-5 my-3">

@@ -23,11 +23,7 @@
                     <textarea class="form-control" name='content' rows="10" cols="60"
                         id="board_content">{{ content }}{{ board.content }}</textarea>
                 </div>
-                {% if board_images is not None %}
-                {% for board_image in  board_images %}
                 <div><img src='{{ MEDIA_URL }}{{ board_image.image }}' width=200></div>
-                {% endfor %}
-                {% endif %}
                 <div class="form-group">
                     <label for="board_content">画像</label>
                     <input type= 'file' name='image' value="none">

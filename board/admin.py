@@ -9,7 +9,7 @@ class BoardModelAdmin(admin.ModelAdmin):
     # 一覧表示画面のソート
     ordering = ('created_at',)  # '-created_at' とすると降順になります。
     # 編集画面のフィールド
-    fields = ('title', 'author', 'content')
+    fields = ('title', 'author', 'content', 'image')
 
 admin.site.register(BoardModel, BoardModelAdmin)    
 
