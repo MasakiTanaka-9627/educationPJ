@@ -9,7 +9,6 @@ from board.models import BoardModel
 
 # Ans
 
-
 def ans_createfunc(request):
     # if request.method == 'GET':
     #     return render(request, 'board_detail.html')
@@ -19,21 +18,14 @@ def ans_createfunc(request):
         post_title = request.POST.get('title')
         post_author = request.POST.get('user')
         board_id = request.POST.get('board')
+        post_image = request.FILES['image']
         ans_board = BoardModel.objects.get(id=board_id)
         ans = AnsModel(
-            content=post_content, author=post_author, board_id=ans_board
+            content=post_content, author=post_author, board_id=ans_board, image=post_image
         )
         ans.save()
-
-        post_image = request.FILES['image']
-        ans_image = AnsImage.objects.create(
-            image=post_image, ans_id=ans.id
-        )
-        ans_image.save()
-
         messages.success(request, '回答を投稿しました。')
         return redirect('board_list')
-
 
 def ans_detailfunc(request, pk):
     ans = AnsModel.objects.get(pk=pk)

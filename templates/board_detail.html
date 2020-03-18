@@ -59,12 +59,14 @@
                 <input type="submit" name="commit" value="送信" class="btn btn-primary btn-block" data-disable-with="送信">
             </form>
             <h2>回答一覧</h2>
-            {% for ans in ans_all%}
+            {% for ans in ans_all %}
             <div class="box3 mb-3">
                 <div class="user">ユーザー名：{{ ans.author }}</div>
                 <div class="content">id：{{ ans.pk }}</div>
                 <span class="content">本文：{{ ans.content}}</span>
-                <div class="content">画像：</div><img src='{{ MEDIA_URL }}{{ ans.ansimage.image }}' width=200>
+                {% if ans.image　is not None %}
+                <div class="content">画像：</div><img src='{{ MEDIA_URL }}{{ ans.image }}' width=200>
+                {% endif %}
                 <div class="mx-5 my-3">
                     <a class="btn btn-outline-primary btn-block my-1" href="#">詳細</a>
                 </div>

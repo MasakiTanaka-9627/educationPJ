@@ -10,7 +10,6 @@ from django.views.generic import CreateView
 
 # Board
 
-
 def board_createfunc(request):
     if request.method == 'GET':
         return render(request, 'board_create.html')
@@ -39,13 +38,11 @@ def board_createfunc(request):
         messages.success(request, '記事を作成しました。')
         return redirect('board_list')
 
-
 def board_listfunc(request):
     boards = BoardModel.objects.all().order_by('-created_at')
     for board in boards:
         board.ans_count = AnsModel.objects.filter(board_id_id=board.id).count()
     return render(request, 'board_list.html', {'boards': boards})
-
 
 def board_detailfunc(request, pk):
     board = BoardModel.objects.get(pk=pk)
@@ -53,13 +50,11 @@ def board_detailfunc(request, pk):
     ans_all = AnsModel.objects.filter(board_id_id=pk)
     return render(request, 'board_detail.html', {'board': board, 'board_images': board_images ,'ans_all': ans_all})
 
-
 @require_POST
 def board_deletefunc(request, pk):
     board = get_object_or_404(BoardModel, id=pk)
     board.delete()
     return redirect('board_list')
-
 
 def board_editfunc(request, pk):
     board = BoardModel.objects.get(pk=pk)

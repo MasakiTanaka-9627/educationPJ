@@ -8,6 +8,7 @@ class AnsModel(models.Model):
     content = models.TextField()
     author = models.CharField(max_length=50)
     board_id = models.ForeignKey(BoardModel, on_delete=models.CASCADE, blank=True, null=True)
+    image = models.ImageField(upload_to='images', null=True)
     created_at = models.DateTimeField(verbose_name='登録日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
 
