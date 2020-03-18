@@ -10,5 +10,4 @@ class AnsAdmin(admin.ModelAdmin):
     ordering = ('created_at',)  # '-created_at' とすると降順になります。
     # 編集画面のフィールド
     fields = ('author', 'content', 'board_id')
-    
 admin.site.register(Ans, AnsAdmin)
