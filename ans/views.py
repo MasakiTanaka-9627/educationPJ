@@ -26,10 +26,10 @@ def ans_createfunc(request):
         ans.save()
 
         post_image = request.FILES['image']
-        board_image = AnsImage.objects.create(
+        ans_image = AnsImage.objects.create(
             image=post_image, ans_id=ans.id
         )
-        board_image.save()
+        ans_image.save()
 
         messages.success(request, '回答を投稿しました。')
         return redirect('board_list')

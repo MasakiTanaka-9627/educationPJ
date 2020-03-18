@@ -11,10 +11,13 @@
 <h2>プロフィール</h2>
     <div class="box_profile">
         <div class="row">
-        <div class="col-lg-6 mb-3">
+        <div class="col-lg-6 mb-2">
+            <div class="mt-2 mx-4">
+            <img src='{{ MEDIA_URL }}{{ user.userimage.image }}' width=200>
+            </div>
             {% if user.pk == request.user.pk %}
             <form method="GET" action="{% url 'user_edit' user.pk %}"> {% csrf_token %}
-                <div class="mt-2">
+                <div class="mt-5 m">
                     <button class="btn btn-outline-secondary btn-block" type="submit">プロフィール設定</button>
                 </div>
             </form>
@@ -34,4 +37,13 @@
         </div>
     </div>
 </div>
+<div>
+    <h2>質問一覧</h2>
+</div>
+
+<div>
+    <h2>回答一覧</h2>
+</div>
+
+
 {% endblock main %}

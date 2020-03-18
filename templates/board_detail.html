@@ -28,7 +28,12 @@
                 <div class="user">ユーザー名：{{ board.author }}</div>
                 <div class="title">タイトル：{{ board.title }}</div>
                 <div class="content">id：{{ board.pk }}</div>
-                <span class="content">本文：{{ board.content}}</span>
+                <div class="content">本文：{{ board.content}}</div>
+                {% if board_images is not None %}
+                {% for board_image in  board_images %}
+                <div class="content">画像：</div><img src='{{ MEDIA_URL }}{{ board_image.image }}' width=200>
+                {% endfor %}
+                {% endif %}
                 <div class="mx-5 my-3">
                     <a class="btn btn-outline-primary btn-block my-1" href="{% url 'board_edit' board.pk %}">編集</a>
                     <form method="post" action="{% url 'board_delete' board.pk %}" onSubmit="return myfunc();">
@@ -38,27 +43,28 @@
                 </div>
             </div>
             <h2>回答</h2>
-            <form method="POST" id="new_comment" action="{% url 'ans_create'%}"  enctype="multipart/form-data">
+            <form method="POST" id="new_comment" action="{% url 'ans_create'%}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-2">
                     <textarea class="form-control" name="content" id="comment_content" cols="10" rows="5"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="board_content" enctype="multipart/form-data">画像</label>
-                    <input type= 'file' name='image' enctype="multipart/form-data">
+                    <label for="board_content">画像</label>
+                    <input type= 'file' name='image'>
                 </div>
 
                 <input type='hidden' name='user' value='{{ user.username }}'>
-                <input type='hidden' name='board' value='{{ board.id }}'>                
+                <input type='hidden' name='board' value='{{ board.id }}'>
                 <input type="submit" name="commit" value="送信" class="btn btn-primary btn-block" data-disable-with="送信">
             </form>
             <h2>回答一覧</h2>
-            {% for ans in  ans_all%}
+            {% for ans in ans_all%}
             <div class="box3 mb-3">
                 <div class="user">ユーザー名：{{ ans.author }}</div>
                 <div class="content">id：{{ ans.pk }}</div>
                 <span class="content">本文：{{ ans.content}}</span>
+                <div class="content">画像：</div><img src='{{ MEDIA_URL }}{{ ans.ansimage.image }}' width=200>
                 <div class="mx-5 my-3">
                     <a class="btn btn-outline-primary btn-block my-1" href="#">詳細</a>
                 </div>
