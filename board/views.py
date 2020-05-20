@@ -35,12 +35,12 @@ def board_createfunc(request):
 def board_listfunc(request):
     boards = Board.objects.all().order_by('-created_at')
     for board in boards:
-        board.ans_count = Ans.objects.filter(board_id_id=board.id).count()
+        board.ans_count = Ans.objects.filter(board_id=board.id).count()
     return render(request, 'board_list.html', {'boards': boards})
 
 def board_detailfunc(request, pk):
     board = Board.objects.get(pk=pk)
-    ans_all = Ans.objects.filter(board_id_id=pk).order_by('-created_at')
+    ans_all = Ans.objects.filter(board_id=pk).order_by('-created_at')
     return render(request, 'board_detail.html', {'board': board, 'ans_all': ans_all})
 
 
